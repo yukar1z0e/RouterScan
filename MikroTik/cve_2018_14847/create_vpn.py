@@ -83,7 +83,6 @@ class CreateVpn:
         for i in range(0, len(bri_list) - 1):
             per_bri_list = bri_list[i].decode('ascii').split('mac-address=')
             # print(per_bri_list)
-
             per_mac_list = per_bri_list[1].split(' ')
             bri_mac_addr = per_mac_list[0]
             bri_mac_addr_list.append(bri_mac_addr)
