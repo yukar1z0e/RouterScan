@@ -22,7 +22,7 @@ def init_jinja2(app, **kw):
     path = kw.get('path', None)
     if path is None:
         path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
-    logging.info('set jinja2 template path: %s' % path)
+    logging.info('set jinja2 templates path: %s' % path)
     env = Environment(loader=FileSystemLoader(path), **options)
     filters = kw.get('filters', None)
     if filters is not None:
@@ -109,8 +109,8 @@ def datetime_filter(t):
 
 
 async def init(loop_obj):
-    await www.orm.create_pool(loop=loop, host='127.0.0.1', port=3306, user='www', password='www', db='router_scan')
-    app = web.Application(loop=loop, middlewares=[logger_factory, response_factory])
+    await www.orm.create_pool(loop=loop_obj, host='127.0.0.1', port=3306, user='www', password='www', db='router_scan')
+    app = web.Application(middlewares=[logger_factory, response_factory])
     init_jinja2(app, filters=dict(datetime=datetime_filter))
     add_routes(app, 'handlers')
     add_static(app)

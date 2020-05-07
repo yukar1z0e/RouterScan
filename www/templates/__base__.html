@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    {% block meta %}<!-- block meta  -->{% endblock %}
+    <title>{% block title %} ? {% endblock %} - RouterScan</title>
+    <link rel="stylesheet" href="/static/css/uikit.min.css">
+    <link rel="stylesheet" href="/static/css/uikit.gradient.min.css">
+    <link rel="stylesheet" href="/static/css/awesome.css" />
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/sha1.min.js"></script>
+    <script src="/static/js/uikit.min.js"></script>
+    <script src="/static/js/sticky.min.js"></script>
+    <script src="/static/js/vue.min.js"></script>
+    <script src="/static/js/awesome.js"></script>
+    {% block beforehead %}<!-- before head  -->{% endblock %}
+</head>
+<body>
+    <nav class="uk-navbar uk-navbar-attached uk-margin-bottom">
+        <div class="uk-container uk-container-center">
+            <a href="/" class="uk-navbar-brand">RouterScan</a>
+            <ul class="uk-navbar-nav">
+                <li data-url="blogs"><a href="/"><i class="uk-icon-home"></i> Devices</a></li>
+                <li><a target="_blank" href="/"><i class="uk-icon-book"></i> Usage</a></li>
+                <li><a target="_blank" href="/"><i class="uk-icon-code"></i> Doc</a></li>
+            </ul>
+            <div class="uk-navbar-flip">
+                <ul class="uk-navbar-nav">
+                {% if __user__ %}
+                    <li class="uk-parent" data-uk-dropdown>
+                        <a href="#0"><i class="uk-icon-user"></i> {{ __user__.name }}</a>
+                        <div class="uk-dropdown uk-dropdown-navbar">
+                            <ul class="uk-nav uk-nav-navbar">
+                                <li><a href="/signout"><i class="uk-icon-sign-out"></i> Logout</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                {% else %}
+                    <li><a href="/signin"><i class="uk-icon-sign-in"></i> Login</a></li>
+                    <li><a href="/register"><i class="uk-icon-edit"></i> Register</a></li>
+                {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="uk-container uk-container-center">
+        <div class="uk-grid">
+            <!-- content -->
+            {% block content %}
+            {% endblock %}
+            <!-- // content -->
+        </div>
+    </div>
+
+    <div class="uk-margin-large-top" style="background-color:#eee; border-top:1px solid #ccc;">
+        <div class="uk-container uk-container-center uk-text-center">
+            <div class="uk-panel uk-margin-top uk-margin-bottom">
+                <p>Powered by <a href="/">RouterScan Lab</a>. Copyright &copy; 2020. [<a href="/manage/" target="_blank">Manage</a>]</p>
+                <p><a href="/" target="_blank">test</a>. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

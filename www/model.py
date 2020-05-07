@@ -19,7 +19,7 @@ class User(Model):
     created_at = FloatField(default=time.time)
 
 
-class Blog(Model):
+class Device(Model):
     __table__ = 'blogs'
 
     id = StringField(primary_key=True, default=next_id, ddl='varchar(50)')
