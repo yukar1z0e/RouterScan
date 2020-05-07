@@ -12,6 +12,7 @@ def index(request):
     devices = [
         Device(id='1', name='MikroTik Router', summary=summary_MikroTik, created_at=time.time() - 120),
         Device(id='2', name='TP-Link Router', summary=summary, created_at=time.time() - 3600),
+        Device(id='3', name='TP-Link Router', summary=summary, created_at=time.time() - 3600),
     ]
     return {
         '__template__': 'devices.html',
