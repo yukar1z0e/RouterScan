@@ -48,9 +48,8 @@ class Ui_RouterScanMain(object):
         self.menu_CVE_2018_14847_Action = QtWidgets.QMenu(self.menuCVE_2018_14847)
         self.menu_CVE_2018_14847_Action.setObjectName("menuAction")
 
-        self.menuCVE_2018_14847Exp=QtWidgets.QMenu(self.menuCVE_2018_14847)
+        self.menuCVE_2018_14847Exp = QtWidgets.QMenu(self.menuCVE_2018_14847)
         self.menuCVE_2018_14847Exp.setObjectName("Exploit")
-
 
         self.menuTP_Link = QtWidgets.QMenu(self.menuDevices)
         self.menuTP_Link.setObjectName("menuTP_Link")
@@ -131,7 +130,6 @@ class Ui_RouterScanMain(object):
 
         self.menuCVE_2018_14847Exp.addAction(self.action_CVE_2018_14847_Exploit)
 
-
         self.retranslateUi(RouterScanMain)
         QtCore.QMetaObject.connectSlotsByName(RouterScanMain)
 
@@ -167,9 +165,8 @@ class Ui_RouterScanMain(object):
         self.action_CVE_2018_14847_Create_Proxy.setText(_translate("RouterScanMain", "Create Proxy"))
 
     def targetUi(self):
-        dialog=QtWidgets.QDialog()
-        ui=target_dialog.Ui_target_dialog()
+        dialog = QtWidgets.QDialog()
+        ui = target_dialog.Ui_target_dialog()
         ui.setupUi(dialog)
         dialog.show()
         dialog.exec_()
-
