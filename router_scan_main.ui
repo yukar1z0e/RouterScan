@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RouterScanMain</class>
+ <widget class="QMainWindow" name="RouterScanMain">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Router Scan</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>40</y>
+      <width>741</width>
+      <height>442</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Input</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextBrowser" name="textBrowser"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Output</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextBrowser" name="textBrowser_2"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuDevices">
+    <property name="title">
+     <string>Devices</string>
+    </property>
+    <widget class="QMenu" name="menuMikroTik">
+     <property name="title">
+      <string>MikroTik</string>
+     </property>
+     <widget class="QMenu" name="menuCVE_2018_14847">
+      <property name="title">
+       <string>CVE-2018-14847</string>
+      </property>
+      <widget class="QMenu" name="menuAction">
+       <property name="title">
+        <string>Action</string>
+       </property>
+       <addaction name="actionCreate_Proxy"/>
+       <addaction name="separator"/>
+      </widget>
+      <addaction name="actionExploit"/>
+      <addaction name="menuAction"/>
+     </widget>
+     <addaction name="separator"/>
+     <addaction name="menuCVE_2018_14847"/>
+     <addaction name="actionCVE_2019_3924"/>
+     <addaction name="actionCVE_2019_3943"/>
+     <addaction name="actionCVE_1"/>
+     <addaction name="actionCVE_2"/>
+    </widget>
+    <widget class="QMenu" name="menuTP_Link">
+     <property name="title">
+      <string>TP-Link</string>
+     </property>
+     <addaction name="actionCVE"/>
+     <addaction name="actionCVE_3"/>
+     <addaction name="actionCVE_4"/>
+    </widget>
+    <addaction name="menuMikroTik"/>
+    <addaction name="menuTP_Link"/>
+    <addaction name="actionRouter_1"/>
+    <addaction name="actionRouter_2"/>
+    <addaction name="actionRouter_3"/>
+    <addaction name="actionRouter_4"/>
+   </widget>
+   <widget class="QMenu" name="menuDocument">
+    <property name="title">
+     <string>Document</string>
+    </property>
+    <addaction name="actionSource_Codes"/>
+    <addaction name="actionAPIs"/>
+    <addaction name="actionUsage"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionContact_Us"/>
+    <addaction name="actionUpdate"/>
+   </widget>
+   <addaction name="menuDevices"/>
+   <addaction name="menuDocument"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionRouter_1">
+   <property name="text">
+    <string>Router_1</string>
+   </property>
+  </action>
+  <action name="actionRouter_2">
+   <property name="text">
+    <string>Router_2</string>
+   </property>
+  </action>
+  <action name="actionRouter_3">
+   <property name="text">
+    <string>Router_3</string>
+   </property>
+  </action>
+  <action name="actionRouter_4">
+   <property name="text">
+    <string>Router_4</string>
+   </property>
+  </action>
+  <action name="actionCVE_2019_3924">
+   <property name="text">
+    <string>CVE-2019-3924</string>
+   </property>
+  </action>
+  <action name="actionCVE_2019_3943">
+   <property name="text">
+    <string>CVE-2019-3943</string>
+   </property>
+  </action>
+  <action name="actionCVE_1">
+   <property name="text">
+    <string>CVE_1</string>
+   </property>
+  </action>
+  <action name="actionCVE_2">
+   <property name="text">
+    <string>CVE_2</string>
+   </property>
+  </action>
+  <action name="actionCVE">
+   <property name="text">
+    <string>CVE_1</string>
+   </property>
+  </action>
+  <action name="actionCVE_3">
+   <property name="text">
+    <string>CVE_2</string>
+   </property>
+  </action>
+  <action name="actionCVE_4">
+   <property name="text">
+    <string>CVE_3</string>
+   </property>
+  </action>
+  <action name="actionSource_Codes">
+   <property name="text">
+    <string>Source Codes</string>
+   </property>
+  </action>
+  <action name="actionAPIs">
+   <property name="text">
+    <string>APIs</string>
+   </property>
+  </action>
+  <action name="actionUsage">
+   <property name="text">
+    <string>Usage</string>
+   </property>
+  </action>
+  <action name="actionContact_Us">
+   <property name="text">
+    <string>Contact</string>
+   </property>
+  </action>
+  <action name="actionUpdate">
+   <property name="text">
+    <string>Update</string>
+   </property>
+  </action>
+  <action name="actionExploit">
+   <property name="text">
+    <string>Exploit</string>
+   </property>
+  </action>
+  <action name="actionCreate_Proxy">
+   <property name="text">
+    <string>Create Proxy</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
