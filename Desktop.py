@@ -55,7 +55,6 @@ class TargetDialog(QtWidgets.QDialog):
         CVE,FUN=self.title.split('@')
         print(CVE,FUN)
         print(type(CVE),type(FUN))
-        print(self)
         if ip:
             self.data = ''
             if ip in self.data:
