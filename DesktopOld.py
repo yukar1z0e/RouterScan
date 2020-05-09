@@ -1,8 +1,8 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from Desktop.DialogTarget import Ui_TargetDialog
-from Desktop.MainWindowRouterScan import Ui_RouterScanMainWindow
+from DesktopOldVersion.DialogTarget import Ui_TargetDialog
+from DesktopOldVersion.MainWindowRouterScan import Ui_RouterScanMainWindow
 from MikroTik.cve_2018_14847.get_targets import format_file,format_single_ip
 from MikroTik.cve_2018_14847.exploit import exploit
 from MikroTik.cve_2018_14847.create_vpn import vpn
@@ -51,6 +51,8 @@ class TargetDialog(QtWidgets.QDialog):
         self.ui.pushButtonMultiple.clicked.connect(self.addMultiple)
 
     def addSingle(self):
+        APP.ui.textBrowserOutput.clear()
+        APP.ui.textBrowserTarget.clear()
         ip = self.ui.lineEditSingle.text()
         CVE,FUN=self.title.split('@')
         print(CVE,FUN)
@@ -84,6 +86,8 @@ class TargetDialog(QtWidgets.QDialog):
         print(type(self.data))
 
     def addMultiple(self):
+        APP.ui.textBrowserOutput.clear()
+        APP.ui.textBrowserTarget.clear()
         filename = self.ui.lineEditMultiple.text()
         CVE, FUN = self.title.split('@')
         print(CVE, FUN)
