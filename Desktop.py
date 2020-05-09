@@ -68,9 +68,17 @@ class TargetDialog(QtWidgets.QDialog):
                 APP.ui.textBrowserTarget.append(str(item[0])+':'+str(item[1]))
             if FUN=='EXP':
                 output=exploit(target)
+                for item in output:
+                    info='ip: '+str(item[0])+' port: '+str(item[1])+'\r\n'
+                    for u,p in item[2]:
+                        info+='username: '+u+' password: '+p
+                    APP.ui.textBrowserOutput.append(info)
                 print('OUTPUT',output)
             elif FUN=='VPN':
                 output=vpn(target)
+                for item in output:
+                    output_str='ip: '+str(item[0])+' username: '+str(item[1])+' password: '+str(item[2])
+                    APP.ui.textBrowserOutput.append(output_str)
                 print('OUTPUT',output)
 
         print(self.data)
@@ -92,9 +100,17 @@ class TargetDialog(QtWidgets.QDialog):
                 APP.ui.textBrowserTarget.append(str(item[0]) + ':' + str(item[1]))
             if FUN=='EXP':
                 output=exploit(target)
+                for item in output:
+                    info='ip: '+str(item[0])+' port: '+str(item[1])+'\r\n'
+                    for u,p in item[2]:
+                        info+='username: '+u+' password: '+p+'\r\n'
+                    APP.ui.textBrowserOutput.append(info)
                 print('OUTPUT',output)
             elif FUN=='VPN':
                 output=vpn(target)
+                for item in output:
+                    output_str='ip: '+str(item[0])+' username: '+str(item[1])+' password: '+str(item[2])
+                    APP.ui.textBrowserOutput.append(output_str)
                 print('OUTPUT',output)
 
         print(self.data)
