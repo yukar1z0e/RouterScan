@@ -91,6 +91,7 @@ class Ui_RouterScanMainWindow(object):
         self.retranslateUi(RouterScanMainWindow)
         QtCore.QMetaObject.connectSlotsByName(RouterScanMainWindow)
 
+
     def retranslateUi(self, RouterScanMainWindow):
         _translate = QtCore.QCoreApplication.translate
         RouterScanMainWindow.setWindowTitle(_translate("RouterScanMainWindow", "Router Scanner"))

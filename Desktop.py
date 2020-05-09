@@ -125,6 +125,8 @@ class RouterScan:
         self.app = QtWidgets.QApplication(sys.argv)
         self.ui = Ui_RouterScanMainWindow()
         self.window = RouterScanMainWindow(self)
+        # self.window.setWindowOpacity(1)
+        # self.window.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.ui.setupUi(self.window)
         self.setupAction()
         self.window.show()
