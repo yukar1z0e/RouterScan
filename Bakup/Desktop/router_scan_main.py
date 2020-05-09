@@ -5,10 +5,9 @@
 # Created by: PyQt5 UI code generator 5.14.2
 #
 # WARNING! All changes made in this file will be lost!
-import sys
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-import target_dialog
+from PyQt5 import QtCore, QtWidgets
+from Bakup.Desktop import target_dialog
 
 
 class Ui_RouterScanMain(object):

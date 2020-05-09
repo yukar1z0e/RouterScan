@@ -1,5 +1,5 @@
-import www.config_default
-import www.config_override
+import Bakup.Web.www.config_default
+import Bakup.Web.www.config_override
 
 
 class Dict(dict):
@@ -42,10 +42,10 @@ def toDict(d):
     return D
 
 
-configs = www.config_default.configs
+configs = Bakup.Web.www.config_default.configs
 
 try:
-    configs = merge(configs, www.config_override.configs)
+    configs = merge(configs, Bakup.Web.www.config_override.configs)
 except ImportError:
     pass
 

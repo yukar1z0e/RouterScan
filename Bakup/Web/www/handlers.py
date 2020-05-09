@@ -1,8 +1,8 @@
-import re, time, json, logging, hashlib, base64, asyncio
+import time
 
-from www.coroweb import get, post
+from Bakup.Web.www.coroweb import get
 
-from www.model import User, Comment, Device, next_id
+from Bakup.Web.www.model import Device
 
 
 @get('/')

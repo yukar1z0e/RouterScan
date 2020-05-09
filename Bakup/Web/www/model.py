@@ -1,6 +1,6 @@
 import time, uuid
 
-from www.orm import Model, StringField, BooleanField, FloatField, TextField
+from Bakup.Web.www.orm import Model, StringField, BooleanField, FloatField, TextField
 
 
 def next_id():

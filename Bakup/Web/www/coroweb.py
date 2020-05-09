@@ -4,7 +4,7 @@ from urllib import parse
 
 from aiohttp import web
 
-from www.api import APIError
+from Bakup.Web.www.api import APIError
 
 
 def get(path):
