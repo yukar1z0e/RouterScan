@@ -24,8 +24,8 @@ class SSHClient:
             result = out.decode('ascii')
             # print(result)
         except:
-            out=b' '
-            result=out.decode('ascii')
+            out = b' '
+            result = out.decode('ascii')
 
         return out, result
 
@@ -60,7 +60,7 @@ class CreateVpn:
     # get ethernet information
     def get_ethernet(self):
         eth_info_list = []
-        eth_out, eth_info= self.ssh.execute('/interface ethernet print')
+        eth_out, eth_info = self.ssh.execute('/interface ethernet print')
         # print('ethernet out\n', eth_out)
         eth_list = eth_out.split(b'\r\n')
         for i in range(2, len(eth_list) - 2):
@@ -160,10 +160,10 @@ def create_main(ip, usr, pwd):
     return vpn_username, vpn_password
 
 
-def run():
-    targets = format_file('result.txt')
+def vpn(targets):
     info_list = exploit(targets)
     print(info_list)
+    vpn_list=[]
     for target in info_list:
         ip = target[0]
         print(ip)
@@ -180,8 +180,14 @@ def run():
                 with open('vpn.txt', 'a')as f:
                     f.write(str(vpn_info))
                 print('create vpn success')
+                vpn_list.append(vpn_info)
             else:
                 print('wrong password')
+    return vpn_list
+
+def run():
+    targets = format_file('result.txt')
+    print(vpn(targets))
 
 
 if __name__ == '__main__':
