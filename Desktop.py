@@ -1,7 +1,32 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Desktop.MainWindowRouterScan import Ui_RouterScanMainWindow, RouterScanMainWindow
+
+from Desktop.DialogTarget import Ui_TargetDialog
+from Desktop.MainWindowRouterScan import Ui_RouterScanMainWindow
 import qtawesome
+
+APP=None
+
+class RouterScanMainWindow(QtWidgets.QMainWindow):
+    app = None
+
+    def __init__(self, app):
+        super(RouterScanMainWindow, self).__init__()
+        self.app = app
+
+    def show_DialogTarget(self):
+        dialog_target = QtWidgets.QDialog()
+        ui = Ui_TargetDialog()
+        ui.setupUi(dialog_target)
+        dialog_target.show()
+        dialog_target.exec_()
+
+
+class TargetDialog(QtWidgets.QDialog):
+    data=None
+    def __init__(self,data):
+        super(TargetDialog,self).__init__(APP.window)
+        self.data=data
 
 
 class RouterScan:
@@ -12,7 +37,7 @@ class RouterScan:
         self.app = QtWidgets.QApplication(sys.argv)
         self.ui = Ui_RouterScanMainWindow()
         self.window = RouterScanMainWindow(self)
-        self.window.setWindowIcon(QtGui.QIcon('router.png'))
+        self.window.setWindowIcon(QtGui.QIcon(qtawesome.icon('fa5s.network-wired')))
         self.ui.setupUi(self.window)
         self.setupAction()
         self.window.show()

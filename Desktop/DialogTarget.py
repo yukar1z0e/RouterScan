@@ -75,3 +75,6 @@ class Ui_TargetDialog(object):
         self.pushButtonSingle.setText(_translate("TargetDialog", "OK"))
         self.label_2.setText(_translate("TargetDialog", " MultipleTargets "))
         self.pushButtonMultiple.setText(_translate("TargetDialog", "OK"))
+
+
+

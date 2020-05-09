@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Desktop.DialogTarget import Ui_TargetDialog
+
 
 
 class Ui_RouterScanMainWindow(object):
@@ -111,17 +111,5 @@ class Ui_RouterScanMainWindow(object):
         self.actionVPNCVE_2018_14847.setText(_translate("RouterScanMainWindow", "VPN"))
 
 
-class RouterScanMainWindow(QtWidgets.QMainWindow):
 
-    app = None
 
-    def __init__(self, app):
-        super(RouterScanMainWindow, self).__init__()
-        self.app = app
-
-    def show_DialogTarget(self):
-        dialog_target=QtWidgets.QDialog()
-        ui=Ui_TargetDialog()
-        ui.setupUi(dialog_target)
-        dialog_target.show()
-        dialog_target.exec_()
