@@ -182,7 +182,7 @@ def vpn(targets):
                 vpn_info = [ip, vpn_username, vpn_password]
                 print('write into vpn.txt')
                 with open('vpn.txt', 'a')as f:
-                    f.write(str(vpn_info))
+                    f.write(str(vpn_info)+'\r\n')
                 print('create vpn success')
                 vpn_list.append(vpn_info)
             else:
