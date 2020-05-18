@@ -2,3 +2,6 @@
 /venv/
 *.txt
 .idea/*
+/.idea/
+.idea
+/.idea/*
