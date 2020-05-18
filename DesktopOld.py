@@ -7,8 +7,6 @@ from MikroTik.cve_2018_14847.get_targets import format_file,format_single_ip
 from MikroTik.cve_2018_14847.exploit import exploit
 from MikroTik.cve_2018_14847.create_vpn import vpn
 
-# APP = None
-
 
 class RouterScanMainWindow(QtWidgets.QMainWindow):
     app = None
@@ -29,6 +27,15 @@ class RouterScanMainWindow(QtWidgets.QMainWindow):
     def show_DialogTargetCVE_2018_14847VPN(self):
         data = []
         dialog_target = TargetDialog(data, title='CVE_2018_14847@VPN')
+        # ui = Ui_TargetDialog()
+        # ui.setupUi(dialog_target)
+        dialog_target.setupAction()
+        dialog_target.show()
+        dialog_target.exec_()
+
+    def show_DialogTargetCVE_2018_13379EXP(self):
+        data = []
+        dialog_target = TargetDialog(data, title='CVE_2018_13379@EXP')
         # ui = Ui_TargetDialog()
         # ui.setupUi(dialog_target)
         dialog_target.setupAction()
@@ -138,6 +145,7 @@ class RouterScan:
     def setupAction(self):
         self.ui.actionExploitCVE_2018_14847.triggered.connect(self.window.show_DialogTargetCVE_2018_14847EXP)
         self.ui.actionVPNCVE_2018_14847.triggered.connect(self.window.show_DialogTargetCVE_2018_14847VPN)
+        self.ui.actionExploitCVE_2018_13379.triggered.connect(self.window.show_DialogTargetCVE_2018_13379EXP)
 
 
 if __name__ == '__main__':

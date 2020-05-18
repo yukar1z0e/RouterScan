@@ -76,30 +76,41 @@
       <property name="title">
        <string>CVE_2018_14847</string>
       </property>
-      <widget class="QMenu" name="menuUtilization">
-       <property name="title">
-        <string>Utilization</string>
-       </property>
-       <addaction name="actionVPNCVE_2018_14847"/>
-      </widget>
       <addaction name="actionExploitCVE_2018_14847"/>
-      <addaction name="menuUtilization"/>
+      <addaction name="actionUtilizationCVE_2018_14847"/>
      </widget>
      <addaction name="menuCVE_2018_14847"/>
+     <addaction name="actionCVE_2019_3924"/>
+     <addaction name="actionCVE_2019_3943"/>
+     <addaction name="actionCVE_2020_5720"/>
+     <addaction name="action0Day"/>
+    </widget>
+    <widget class="QMenu" name="menuTP_Link">
+     <property name="title">
+      <string>TP_Link</string>
+     </property>
+     <addaction name="actionCVE_2019_15060"/>
+     <addaction name="actionCVE_2019_13614"/>
+     <addaction name="action0Day_2"/>
+    </widget>
+    <widget class="QMenu" name="menuCisco">
+     <property name="title">
+      <string>Cisco</string>
+     </property>
+     <addaction name="actionCVE_2012_4620"/>
+     <addaction name="actionCVE_2019_12717"/>
+     <addaction name="action0Day_3"/>
     </widget>
     <widget class="QMenu" name="menuFortinet">
      <property name="title">
       <string>Fortinet</string>
      </property>
-     <widget class="QMenu" name="menuCVE_2018_13379">
-      <property name="title">
-       <string>CVE_2018_13379</string>
-      </property>
-      <addaction name="actionExploitCVE_2018_13379"/>
-     </widget>
-     <addaction name="menuCVE_2018_13379"/>
+     <addaction name="actionCVE_2019_13398"/>
+     <addaction name="action0Day_4"/>
     </widget>
     <addaction name="menuMikroTik"/>
+    <addaction name="menuTP_Link"/>
+    <addaction name="menuCisco"/>
     <addaction name="menuFortinet"/>
    </widget>
    <widget class="QMenu" name="menuDocument">
@@ -152,14 +163,69 @@
     <string>Exploit</string>
    </property>
   </action>
-  <action name="actionExploitCVE_2018_13379">
+  <action name="actionUtilizationCVE_2018_14847">
    <property name="text">
-    <string>Exploit</string>
+    <string>Utilization</string>
    </property>
   </action>
-  <action name="actionVPNCVE_2018_14847">
+  <action name="actionCVE_2019_3924">
    <property name="text">
-    <string>VPN</string>
+    <string>CVE_2019_3924</string>
+   </property>
+  </action>
+  <action name="actionCVE_2019_3943">
+   <property name="text">
+    <string>CVE_2019_3943</string>
+   </property>
+  </action>
+  <action name="actionCVE_2020_5720">
+   <property name="text">
+    <string>CVE_2020_5720</string>
+   </property>
+  </action>
+  <action name="action0Day">
+   <property name="text">
+    <string>0Day</string>
+   </property>
+  </action>
+  <action name="actionCVE_2019_15060">
+   <property name="text">
+    <string>CVE_2019_15060</string>
+   </property>
+  </action>
+  <action name="actionCVE_2019_13614">
+   <property name="text">
+    <string>CVE_2019_13614</string>
+   </property>
+  </action>
+  <action name="action0Day_2">
+   <property name="text">
+    <string>0Day</string>
+   </property>
+  </action>
+  <action name="actionCVE_2012_4620">
+   <property name="text">
+    <string>CVE_2012_4620</string>
+   </property>
+  </action>
+  <action name="actionCVE_2019_12717">
+   <property name="text">
+    <string>CVE_2019_12717</string>
+   </property>
+  </action>
+  <action name="action0Day_3">
+   <property name="text">
+    <string>0Day</string>
+   </property>
+  </action>
+  <action name="actionCVE_2019_13398">
+   <property name="text">
+    <string>CVE_2019_13398</string>
+   </property>
+  </action>
+  <action name="action0Day_4">
+   <property name="text">
+    <string>0Day</string>
    </property>
   </action>
  </widget>

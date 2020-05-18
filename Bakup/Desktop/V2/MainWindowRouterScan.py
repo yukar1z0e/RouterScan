@@ -10,6 +10,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
+
 class Ui_RouterScanMainWindow(object):
     def setupUi(self, RouterScanMainWindow):
         RouterScanMainWindow.setObjectName("RouterScanMainWindow")
@@ -52,10 +53,6 @@ class Ui_RouterScanMainWindow(object):
         self.menuCVE_2018_14847.setObjectName("menuCVE_2018_14847")
         self.menuUtilization = QtWidgets.QMenu(self.menuCVE_2018_14847)
         self.menuUtilization.setObjectName("menuUtilization")
-        self.menuFortinet = QtWidgets.QMenu(self.menuDevices)
-        self.menuFortinet.setObjectName("menuFortinet")
-        self.menuCVE_2018_13379 = QtWidgets.QMenu(self.menuFortinet)
-        self.menuCVE_2018_13379.setObjectName("menuCVE_2018_13379")
         self.menuDocument = QtWidgets.QMenu(self.menubar)
         self.menuDocument.setObjectName("menuDocument")
         self.menuHelp = QtWidgets.QMenu(self.menubar)
@@ -76,18 +73,13 @@ class Ui_RouterScanMainWindow(object):
         self.actionUsage.setObjectName("actionUsage")
         self.actionExploitCVE_2018_14847 = QtWidgets.QAction(RouterScanMainWindow)
         self.actionExploitCVE_2018_14847.setObjectName("actionExploitCVE_2018_14847")
-        self.actionExploitCVE_2018_13379 = QtWidgets.QAction(RouterScanMainWindow)
-        self.actionExploitCVE_2018_13379.setObjectName("actionExploitCVE_2018_13379")
         self.actionVPNCVE_2018_14847 = QtWidgets.QAction(RouterScanMainWindow)
         self.actionVPNCVE_2018_14847.setObjectName("actionVPNCVE_2018_14847")
         self.menuUtilization.addAction(self.actionVPNCVE_2018_14847)
         self.menuCVE_2018_14847.addAction(self.actionExploitCVE_2018_14847)
         self.menuCVE_2018_14847.addAction(self.menuUtilization.menuAction())
         self.menuMikroTik.addAction(self.menuCVE_2018_14847.menuAction())
-        self.menuCVE_2018_13379.addAction(self.actionExploitCVE_2018_13379)
-        self.menuFortinet.addAction(self.menuCVE_2018_13379.menuAction())
         self.menuDevices.addAction(self.menuMikroTik.menuAction())
-        self.menuDevices.addAction(self.menuFortinet.menuAction())
         self.menuDocument.addAction(self.actionDocument)
         self.menuDocument.addAction(self.actionAPIs)
         self.menuDocument.addAction(self.actionUsage)
@@ -96,9 +88,9 @@ class Ui_RouterScanMainWindow(object):
         self.menubar.addAction(self.menuDevices.menuAction())
         self.menubar.addAction(self.menuDocument.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
-
         self.retranslateUi(RouterScanMainWindow)
         QtCore.QMetaObject.connectSlotsByName(RouterScanMainWindow)
+
 
     def retranslateUi(self, RouterScanMainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -109,8 +101,6 @@ class Ui_RouterScanMainWindow(object):
         self.menuMikroTik.setTitle(_translate("RouterScanMainWindow", "MikroTik"))
         self.menuCVE_2018_14847.setTitle(_translate("RouterScanMainWindow", "CVE_2018_14847"))
         self.menuUtilization.setTitle(_translate("RouterScanMainWindow", "Utilization"))
-        self.menuFortinet.setTitle(_translate("RouterScanMainWindow", "Fortinet"))
-        self.menuCVE_2018_13379.setTitle(_translate("RouterScanMainWindow", "CVE_2018_13379"))
         self.menuDocument.setTitle(_translate("RouterScanMainWindow", "Document"))
         self.menuHelp.setTitle(_translate("RouterScanMainWindow", "Help"))
         self.actionHelp.setText(_translate("RouterScanMainWindow", "Help"))
@@ -119,8 +109,4 @@ class Ui_RouterScanMainWindow(object):
         self.actionDocument.setText(_translate("RouterScanMainWindow", "Document"))
         self.actionUsage.setText(_translate("RouterScanMainWindow", "Usage"))
         self.actionExploitCVE_2018_14847.setText(_translate("RouterScanMainWindow", "Exploit"))
-        self.actionExploitCVE_2018_13379.setText(_translate("RouterScanMainWindow", "Exploit"))
         self.actionVPNCVE_2018_14847.setText(_translate("RouterScanMainWindow", "VPN"))
-
-
-

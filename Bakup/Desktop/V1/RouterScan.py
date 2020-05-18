@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets
 import sys
-from Bakup.Desktop import router_scan_main
+from Bakup.Desktop.V1 import router_scan_main
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

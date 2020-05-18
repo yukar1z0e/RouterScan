@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtWidgets
-from Bakup.Desktop import target_dialog
+from Bakup.Desktop.V1 import target_dialog
 
 
 class Ui_RouterScanMain(object):

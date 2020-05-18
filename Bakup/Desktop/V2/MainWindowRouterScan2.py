@@ -121,6 +121,3 @@ class Ui_RouterScanMainWindow(object):
         self.actionExploitCVE_2018_14847.setText(_translate("RouterScanMainWindow", "Exploit"))
         self.actionExploitCVE_2018_13379.setText(_translate("RouterScanMainWindow", "Exploit"))
         self.actionVPNCVE_2018_14847.setText(_translate("RouterScanMainWindow", "VPN"))
-
-
-
