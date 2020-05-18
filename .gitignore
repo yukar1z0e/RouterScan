@@ -1,4 +1,4 @@
 # Project exclude paths
 /venv/
 *.txt
-/.idea/
+.idea
