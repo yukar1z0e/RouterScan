@@ -1,11 +1,13 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from Fortinet.CVE_2018_13379 import exploit as CVE_2018_13379EXP
 from DesktopOldVersion.DialogTarget import Ui_TargetDialog
 from DesktopOldVersion.MainWindowRouterScan import Ui_RouterScanMainWindow
-from MikroTik.cve_2018_14847.get_targets import format_file,format_single_ip
+from MikroTik.cve_2018_14847.get_targets import format_file, format_single_ip
 from MikroTik.cve_2018_14847.exploit import exploit
 from MikroTik.cve_2018_14847.create_vpn import vpn
+from Utilization.format_target import Format
 
 
 class RouterScanMainWindow(QtWidgets.QMainWindow):
@@ -17,7 +19,7 @@ class RouterScanMainWindow(QtWidgets.QMainWindow):
 
     def show_DialogTargetCVE_2018_14847EXP(self):
         data = []
-        dialog_target = TargetDialog(data,title='CVE_2018_14847@EXP')
+        dialog_target = TargetDialog(data, title='CVE_2018_14847@EXP')
         # ui = Ui_TargetDialog()
         # ui.setupUi(dialog_target)
         dialog_target.setupAction()
@@ -46,10 +48,10 @@ class RouterScanMainWindow(QtWidgets.QMainWindow):
 class TargetDialog(QtWidgets.QDialog):
     data = None
 
-    def __init__(self, data,title):
+    def __init__(self, data, title):
         super(TargetDialog, self).__init__(APP.window)
         self.data = data
-        self.title=title
+        self.title = title
         self.ui = Ui_TargetDialog()
         self.ui.setupUi(self)
 
@@ -61,33 +63,43 @@ class TargetDialog(QtWidgets.QDialog):
         APP.ui.textBrowserOutput.clear()
         APP.ui.textBrowserTarget.clear()
         ip = self.ui.lineEditSingle.text()
-        CVE,FUN=self.title.split('@')
-        print(CVE,FUN)
-        print(type(CVE),type(FUN))
+        CVE, FUN = self.title.split('@')
+        print(CVE, FUN)
+        print(type(CVE), type(FUN))
         if ip:
             self.data = ''
             if ip in self.data:
                 print('[*] INFO: {} is already exits'.format(ip))
                 return
             self.data = ip
-            target=format_single_ip(ip)
+            target = format_single_ip(ip)
             print(target)
             for item in target:
-                APP.ui.textBrowserTarget.append(str(item[0])+':'+str(item[1]))
-            if FUN=='EXP':
-                output=exploit(target)
+                APP.ui.textBrowserTarget.append(str(item[0]))
+            if FUN == 'EXP':
+                if CVE == 'CVE_2018_14847':
+                    output = exploit(target)
+                    for item in output:
+                        info = 'ip: ' + str(item[0]) + ' port: ' + str(item[1]) + '\r\n'
+                        for u, p in item[2]:
+                            info += 'username: ' + u + ' password: ' + p
+                        APP.ui.textBrowserOutput.append(info)
+                    APP.ui.textBrowserOutput.append('CVE_2018_14847@EXP FINISHED')
+                    print('OUTPUT', output)
+                elif CVE == 'CVE_2018_13379':
+                    FormatClass = Format()
+                    output = CVE_2018_13379EXP.Exploit(FormatClass.format_ip(ip))
+                    for item in output:
+                        info = 'ip: ' + str(item[0]) + '\r\nVPN Info: ' + str(item[1]) + '\r\n'
+                        APP.ui.textBrowserOutput.append(info)
+                    APP.ui.textBrowserOutput.append('CVE_2018_13379@EXP FINISHED')
+                    print('CVE_2018_13379 EXP Finished\r\n', output)
+            elif FUN == 'VPN':
+                output = vpn(target)
                 for item in output:
-                    info='ip: '+str(item[0])+' port: '+str(item[1])+'\r\n'
-                    for u,p in item[2]:
-                        info+='username: '+u+' password: '+p
-                    APP.ui.textBrowserOutput.append(info)
-                print('OUTPUT',output)
-            elif FUN=='VPN':
-                output=vpn(target)
-                for item in output:
-                    output_str='ip: '+str(item[0])+' username: '+str(item[1])+' password: '+str(item[2])
+                    output_str = 'ip: ' + str(item[0]) + ' username: ' + str(item[1]) + ' password: ' + str(item[2])
                     APP.ui.textBrowserOutput.append(output_str)
-                print('OUTPUT',output)
+                print('OUTPUT', output)
 
         print(self.data)
         print(type(self.data))
@@ -105,23 +117,32 @@ class TargetDialog(QtWidgets.QDialog):
                 print('[*] INFO: {} is already exits'.format(filename))
                 return
             self.data = filename
-            target=format_file(self.data)
+            target = format_file(self.data)
             for item in target:
-                APP.ui.textBrowserTarget.append(str(item[0]) + ':' + str(item[1]))
-            if FUN=='EXP':
-                output=exploit(target)
+                APP.ui.textBrowserTarget.append(str(item[0]))
+            if FUN == 'EXP':
+                if CVE == 'CVE_2018_14847':
+                    output = exploit(target)
+                    for item in output:
+                        info = 'ip: ' + str(item[0]) + ' port: ' + str(item[1]) + '\r\n'
+                        for u, p in item[2]:
+                            info += 'username: ' + u + ' password: ' + p + '\r\n'
+                        APP.ui.textBrowserOutput.append(info)
+                    print('OUTPUT', output)
+                elif CVE == 'CVE_2018_13379':
+                    FormatClass = Format()
+                    output = CVE_2018_13379EXP.Exploit(FormatClass.format_file(filename))
+                    for item in output:
+                        info = 'ip: ' + str(item[0]) + '\r\nVPN Info: ' + str(item[1]) + '\r\n'
+                        APP.ui.textBrowserOutput.append(info)
+                    APP.ui.textBrowserOutput.append('CVE_2018_13379@EXP FINISHED')
+                    print('CVE_2018_13379 EXP Finished\r\n', output)
+            elif FUN == 'VPN':
+                output = vpn(target)
                 for item in output:
-                    info='ip: '+str(item[0])+' port: '+str(item[1])+'\r\n'
-                    for u,p in item[2]:
-                        info+='username: '+u+' password: '+p+'\r\n'
-                    APP.ui.textBrowserOutput.append(info)
-                print('OUTPUT',output)
-            elif FUN=='VPN':
-                output=vpn(target)
-                for item in output:
-                    output_str='ip: '+str(item[0])+' username: '+str(item[1])+' password: '+str(item[2])
+                    output_str = 'ip: ' + str(item[0]) + ' username: ' + str(item[1]) + ' password: ' + str(item[2])
                     APP.ui.textBrowserOutput.append(output_str)
-                print('OUTPUT',output)
+                print('OUTPUT', output)
 
         print(self.data)
         print(type(self.data))
