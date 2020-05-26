@@ -99,8 +99,22 @@
      </widget>
      <addaction name="menuCVE_2018_13379"/>
     </widget>
+    <widget class="QMenu" name="menuCitrix">
+     <property name="title">
+      <string>Citrix</string>
+     </property>
+     <widget class="QMenu" name="menuCVE_2019_19781">
+      <property name="title">
+       <string>CVE_2019_19781</string>
+      </property>
+      <addaction name="actionExploitCVE_2019_19781"/>
+      <addaction name="actionRCECVE_2019_19781"/>
+     </widget>
+     <addaction name="menuCVE_2019_19781"/>
+    </widget>
     <addaction name="menuMikroTik"/>
     <addaction name="menuFortinet"/>
+    <addaction name="menuCitrix"/>
    </widget>
    <widget class="QMenu" name="menuDocument">
     <property name="title">
@@ -160,6 +174,21 @@
   <action name="actionVPNCVE_2018_14847">
    <property name="text">
     <string>VPN</string>
+   </property>
+  </action>
+  <action name="actionExp">
+   <property name="text">
+    <string>Exploit</string>
+   </property>
+  </action>
+  <action name="actionExploitCVE_2019_19781">
+   <property name="text">
+    <string>Exploit</string>
+   </property>
+  </action>
+  <action name="actionRCECVE_2019_19781">
+   <property name="text">
+    <string>RCE</string>
    </property>
   </action>
  </widget>

@@ -44,6 +44,18 @@ class RouterScanMainWindow(QtWidgets.QMainWindow):
         dialog_target.show()
         dialog_target.exec_()
 
+    def show_DialogTargetCVE_2019_19781EXP(self):
+        data = []
+        dialog_target = TargetDialog(data, title='CVE_2019_19781@EXP')
+        # ui = Ui_TargetDialog()
+        # ui.setupUi(dialog_target)
+        dialog_target.setupAction()
+        dialog_target.show()
+        dialog_target.exec_()
+
+    def show_DialogTargetCVE_2019_19781RCE(self):
+        pass
+
 
 class TargetDialog(QtWidgets.QDialog):
     data = None
@@ -167,6 +179,8 @@ class RouterScan:
         self.ui.actionExploitCVE_2018_14847.triggered.connect(self.window.show_DialogTargetCVE_2018_14847EXP)
         self.ui.actionVPNCVE_2018_14847.triggered.connect(self.window.show_DialogTargetCVE_2018_14847VPN)
         self.ui.actionExploitCVE_2018_13379.triggered.connect(self.window.show_DialogTargetCVE_2018_13379EXP)
+        self.ui.actionExploitCVE_2019_19781.triggered.connect(self.window.show_DialogTargetCVE_2019_19781EXP)
+        self.ui.actionRCECVE_2019_19781.triggered.connect(self.window.show_DialogTargetCVE_2019_19781RCE)
 
 
 if __name__ == '__main__':
