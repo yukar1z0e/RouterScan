@@ -1,15 +1,15 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from Fortinet.CVE_2018_13379 import exploit as CVE_2018_13379EXP
 from DesktopOldVersion.DialogTarget import Ui_TargetDialog
 from DesktopOldVersion.MainWindowRouterScan import Ui_RouterScanMainWindow
-from MikroTik.cve_2018_14847.get_targets import format_file, format_single_ip
-from MikroTik.cve_2018_14847.exploit import exploit
-from MikroTik.cve_2018_14847.create_vpn import vpn
+
 from Utilization.format_target import Format
 from Citrix.CVE_2019_19781.exploit import Exploit as CVE_2019_19781EXP
-
+from Fortinet.CVE_2018_13379 import exploit as CVE_2018_13379EXP
+from MikroTik.cve_2018_14847.exploit import exploit
+from MikroTik.cve_2018_14847.create_vpn import vpn
+from MikroTik.cve_2018_14847.get_targets import format_file, format_single_ip
 
 class RouterScanMainWindow(QtWidgets.QMainWindow):
     app = None
@@ -205,4 +205,5 @@ class RouterScan:
 
 
 if __name__ == '__main__':
+
     RouterScan()
