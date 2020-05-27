@@ -8,6 +8,7 @@ from MikroTik.cve_2018_14847.get_targets import format_file, format_single_ip
 from MikroTik.cve_2018_14847.exploit import exploit
 from MikroTik.cve_2018_14847.create_vpn import vpn
 from Utilization.format_target import Format
+from Citrix.CVE_2019_19781.exploit import Exploit as CVE_2019_19781EXP
 
 
 class RouterScanMainWindow(QtWidgets.QMainWindow):
@@ -106,6 +107,16 @@ class TargetDialog(QtWidgets.QDialog):
                         APP.ui.textBrowserOutput.append(info)
                     APP.ui.textBrowserOutput.append('CVE_2018_13379@EXP FINISHED')
                     print('CVE_2018_13379 EXP Finished\r\n', output)
+                elif CVE == 'CVE_2019_19781':
+                    FormatIP=Format()
+                    FormatIP.ImportTargetFromIp(ip)
+                    output=CVE_2019_19781EXP(FormatIP.GetTarget())
+                    del FormatIP
+                    for item in output:
+                        info = str(item) + '\r\n'
+                        APP.ui.textBrowserOutput.append(info)
+                    APP.ui.textBrowserOutput.append('CVE_2019_19781@EXP FINISHED')
+                    print('CVE_2019_19781 EXP Finished\r\n', output)
             elif FUN == 'VPN':
                 output = vpn(target)
                 for item in output:
@@ -113,8 +124,8 @@ class TargetDialog(QtWidgets.QDialog):
                     APP.ui.textBrowserOutput.append(output_str)
                 print('OUTPUT', output)
 
-        print(self.data)
-        print(type(self.data))
+        # print(self.data)
+        # print(type(self.data))
 
     def addMultiple(self):
         APP.ui.textBrowserOutput.clear()
@@ -149,6 +160,16 @@ class TargetDialog(QtWidgets.QDialog):
                         APP.ui.textBrowserOutput.append(info)
                     APP.ui.textBrowserOutput.append('CVE_2018_13379@EXP FINISHED')
                     print('CVE_2018_13379 EXP Finished\r\n', output)
+                elif CVE == 'CVE_2019_19781':
+                    FormatIP=Format()
+                    FormatIP.ImportTargetFromFile(filename)
+                    output=CVE_2019_19781EXP(FormatIP.GetTarget())
+                    del FormatIP
+                    for item in output:
+                        info = str(item) + '\r\n'
+                        APP.ui.textBrowserOutput.append(info)
+                    APP.ui.textBrowserOutput.append('CVE_2019_19781@EXP FINISHED')
+                    print('CVE_2019_19781 EXP Finished\r\n', output)
             elif FUN == 'VPN':
                 output = vpn(target)
                 for item in output:
