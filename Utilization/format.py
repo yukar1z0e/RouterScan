@@ -50,17 +50,17 @@ class Format:
         return target_info
 
     # New Version Function
-    def ImportTargetFromFile(self, filename):
+    def ImportFile(self, filename):
         with open(filename) as file:
             self.target_list = file.read().splitlines()
 
     # New Version Function
-    def ImportTargetFromIp(self, ip):
+    def ImportSingle(self, ip):
         if not self.target_list:
             self.target_list.append(ip)
 
     # New Version Function
-    def FormatTarget(self, target):
+    def FormatValue(self, target):
         ret = []
         # 192.168.1.1 192.168.1.1:80 192.168.1.1/16
         if len(target.split(':')) == 2:
@@ -79,10 +79,10 @@ class Format:
         return ret
 
     # New Version Function
-    def GetTarget(self):
+    def GetValue(self):
         self.result = []
         for target in self.target_list:
-            self.result.extend(self.FormatTarget(target))
+            self.result.extend(self.FormatValue(target))
         ret = self.result
         return ret
 
