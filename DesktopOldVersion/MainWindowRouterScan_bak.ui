@@ -112,9 +112,23 @@
      </widget>
      <addaction name="menuCVE_2019_19781"/>
     </widget>
+    <widget class="QMenu" name="menuPALO_ALTO">
+     <property name="title">
+      <string>PALO ALTO</string>
+     </property>
+     <widget class="QMenu" name="menuCVE_2017_15944">
+      <property name="title">
+       <string>CVE_2017_15944</string>
+      </property>
+      <addaction name="actionExploitCVE_2017_15944"/>
+      <addaction name="actionRCECVE_2017_15944"/>
+     </widget>
+     <addaction name="menuCVE_2017_15944"/>
+    </widget>
     <addaction name="menuMikroTik"/>
     <addaction name="menuFortinet"/>
     <addaction name="menuCitrix"/>
+    <addaction name="menuPALO_ALTO"/>
    </widget>
    <widget class="QMenu" name="menuDocument">
     <property name="title">
@@ -187,6 +201,16 @@
    </property>
   </action>
   <action name="actionRCECVE_2019_19781">
+   <property name="text">
+    <string>RCE</string>
+   </property>
+  </action>
+  <action name="actionExploitCVE_2017_15944">
+   <property name="text">
+    <string>Exploit</string>
+   </property>
+  </action>
+  <action name="actionRCECVE_2017_15944">
    <property name="text">
     <string>RCE</string>
    </property>

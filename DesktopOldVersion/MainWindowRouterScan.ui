@@ -125,10 +125,23 @@
      </widget>
      <addaction name="menuCVE_2017_15944"/>
     </widget>
+    <widget class="QMenu" name="menuJuniper_Pulse">
+     <property name="title">
+      <string>Juniper Pulse</string>
+     </property>
+     <widget class="QMenu" name="menuCVE_2019_11510">
+      <property name="title">
+       <string>CVE_2019_11510</string>
+      </property>
+      <addaction name="actionExploitCVE_2019_11510"/>
+     </widget>
+     <addaction name="menuCVE_2019_11510"/>
+    </widget>
     <addaction name="menuMikroTik"/>
     <addaction name="menuFortinet"/>
     <addaction name="menuCitrix"/>
     <addaction name="menuPALO_ALTO"/>
+    <addaction name="menuJuniper_Pulse"/>
    </widget>
    <widget class="QMenu" name="menuDocument">
     <property name="title">
@@ -213,6 +226,11 @@
   <action name="actionRCECVE_2017_15944">
    <property name="text">
     <string>RCE</string>
+   </property>
+  </action>
+  <action name="actionExploitCVE_2019_11510">
+   <property name="text">
+    <string>Exploit</string>
    </property>
   </action>
  </widget>
